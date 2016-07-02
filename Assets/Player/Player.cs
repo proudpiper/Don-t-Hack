@@ -75,6 +75,13 @@ public class Player : MonoBehaviour{
 	}
 
 	void OnTriggerEnter2D(Collider2D collider){
+		if (collider.transform.CompareTag ("DamagingObj")) {
+			//play damage animation
+		}
+		else if (collider.transform.CompareTag ("HealingObj")) {
+			//play healing animation
+		}
+
 		collider.gameObject.GetComponent<CollidingObject> ().HandleCollision (this);
 	}
 }
