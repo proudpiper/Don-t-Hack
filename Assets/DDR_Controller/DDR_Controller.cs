@@ -7,16 +7,8 @@ public class DDR_Controller : MonoBehaviour{
 
 	void Start(){
 		commandStr = "00000";
-	}
-
-	public DDR_Controller(Player player){
-		this.player = player;
-		timer.SetupTimer (3, CheckCommand);
-	}
-	public void Setup(Player player){
-		this.player = player;
-		timer = transform.FindChild ("DDR_Controller_Timer").GetComponent<Timer> ();
-		timer.SetupTimer (3, CheckCommand);
+		timer = new Timer (3, CheckCommand);
+		this.player = transform.parent.GetComponent<Player> ();
 	}
 
 	Player player;

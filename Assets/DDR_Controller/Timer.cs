@@ -1,42 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Timer : MonoBehaviour {
-
+public class Timer {
 	bool active = false;
 	int seconds = 0;
 	float timeLeft=0;
 	Action timerCompleteHandler;
-	
-	// Update is called once per frame
-	void Update () {
-		if(active){
+
+	public Timer(int seconds, Action handler){
+		this.seconds = seconds;
+		this.timerCompleteHandler = handler;
+	}
+
+	public void UpdateTimer() {
 			timeLeft -= Time.deltaTime;
 			if (timeLeft <= 0) {
 				timerCompleteHandler ();
-				active = false;
 			}
-		}
 	}
 
 	public void StartTimer(int seconds, Action handler) {
 		this.seconds = seconds;
 		this.timerCompleteHandler = handler;
 		timeLeft = seconds;
-		active = true;
+		Timer_Manager.UnsetTimerActive (this);
 	}
 
 	public void StopTimer(){
-		active = false;
+		Timer_Manager.UnsetTimerActive (this);
 	}
 
 	public void ResetTimer(){
 		timeLeft = seconds;
-		active = true;
-	}
-
-	public void SetupTimer(int seconds, Action handler){
-		this.seconds = seconds;
-		this.timerCompleteHandler = handler;
+		Timer_Manager.SetTimerActive (this);
 	}
 }

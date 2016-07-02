@@ -27,7 +27,6 @@ public class Player : MonoBehaviour{
 		medicineCabinet.Add ("Singulair", singulair_Ref);
 
 		commandController = transform.FindChild ("DDR_Controller").GetComponent<DDR_Controller> ();
-		commandController.Setup (this);
 	}
 
 	void Update(){
@@ -75,7 +74,7 @@ public class Player : MonoBehaviour{
 	void EmptyMedicineRequested(){
 	}
 
-	void OnTriggerEnter(Collider2D coliider){
-		
+	void OnTriggerEnter2D(Collider2D collider){
+		collider.gameObject.GetComponent<CollidingObject> ().HandleCollision (this);
 	}
 }
