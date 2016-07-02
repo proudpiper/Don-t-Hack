@@ -1,0 +1,55 @@
+Controller: Less effective
+Quick Relief: More effective
+
+DDR Medicatio System
+
+
+Taking Medications:
+
+Breathability
+Seeing
+Movement
+
+
+Warnings:
+    Weeze
+    Puffy Eyes
+    Coughing
+    
+
+List of medication:
+Albuterol:
+Advair: Coats lungs reshapes how formed
+Singular: 
+Flonase:
+Epinephrine:
+
+
+Effected by:
+    Weather:
+        -Humidity
+        -Temperature
+    Animals:
+    Dust:
+    Smoke:
+    Air Quality:
+
+Treatments:
+    Medications
+    Environment
+    Physical Health
+
+
+Timeline:
+    Start out as kid: Just use medication
+    Getting older: Start having to pay for you own medicatio
+    Adult: Get a full time job to pay for medication
+
+Encounter:
+    -Go to dad's work(Coal Factory)
+    -SPRING
+    -House full of cats
+    -In a field of daisies
+    -Working at desk job for 16 hours a day
+    -Go to a strip club full of smokers
+    -Sauna(Super humid)
