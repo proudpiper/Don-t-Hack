@@ -7,8 +7,8 @@ public class Timer_Manager : MonoBehaviour {
 
 
 	void Update () {
-		foreach (Timer timer in activeTimers) {
-			timer.UpdateTimer ();
+		for (int i = 0; i < activeTimers.Count; i++) {
+			activeTimers [i].UpdateTimer ();
 		}
 	}
 

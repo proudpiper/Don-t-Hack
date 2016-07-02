@@ -53,3 +53,7 @@ Encounter:
     -Working at desk job for 16 hours a day
     -Go to a strip club full of smokers
     -Sauna(Super humid)
+
+DamagingObjects:
+    -Smog cloud
+    -Pollen cloud
