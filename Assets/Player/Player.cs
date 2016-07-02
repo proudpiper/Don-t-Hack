@@ -74,4 +74,8 @@ public class Player : MonoBehaviour{
 
 	void EmptyMedicineRequested(){
 	}
+
+	void OnTriggerEnter(Collider2D coliider){
+		
+	}
 }
