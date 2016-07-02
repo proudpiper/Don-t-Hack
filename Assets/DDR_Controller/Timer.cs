@@ -3,14 +3,16 @@ using System.Collections;
 
 public class Timer {
 	bool active = false;
-	int seconds = 0;
+	float seconds = 0;
 	float timeLeft=0;
 	Action timerCompleteHandler;
 
-	public Timer(int seconds, Action handler){
+	public Timer(float seconds, Action handler){
 		this.seconds = seconds;
 		this.timerCompleteHandler = handler;
 	}
+
+	public Timer(){}
 
 	public void UpdateTimer() {
 			timeLeft -= Time.deltaTime;
@@ -19,11 +21,11 @@ public class Timer {
 			}
 	}
 
-	public void StartTimer(int seconds, Action handler) {
+	public void StartTimer(float seconds, Action handler) {
 		this.seconds = seconds;
 		this.timerCompleteHandler = handler;
 		timeLeft = seconds;
-		Timer_Manager.UnsetTimerActive (this);
+		Timer_Manager.SetTimerActive (this);
 	}
 
 	public void StopTimer(){

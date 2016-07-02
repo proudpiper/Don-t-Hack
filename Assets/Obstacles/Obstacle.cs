@@ -12,13 +12,13 @@ public class Obstacle : CollidingObject {
 		player.visibility = player.visibility - visibilityDamage;
 		Destroy (gameObject);
 	}
-
+		
 	void Update() {
 		this.transform.position = new Vector3 (this.transform.position.x - speed, this.transform.position.y, this.transform.position.z);
-		if (this.transform.position.x < -7) {
-			Destroy (gameObject);
-		}
 	}
 
-
+	void OnExitTrigger2D(Collider2D collider){
+		if (collider.transform.CompareTag ("MainCamera"))
+			Destroy (gameObject);
+	}
 }

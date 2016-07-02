@@ -75,13 +75,21 @@ public class Player : MonoBehaviour{
 	}
 
 	void OnTriggerEnter2D(Collider2D collider){
-		if (collider.transform.CompareTag ("DamagingObj")) {
-			//play damage animation
+		Debug.Log ("Collision!");
+		if (collider.transform.CompareTag ("DamagingObj") == true) {
+			Debug.Log ("Found one!");
+			collider.gameObject.GetComponent<CollidingObject> ().HandleCollision (this);
 		}
-		else if (collider.transform.CompareTag ("HealingObj")) {
-			//play healing animation
+		/*
+		if(collider == null){
+			Debug.Log ("Null Collider");
 		}
-
-		collider.gameObject.GetComponent<CollidingObject> ().HandleCollision (this);
+		if (collider.gameObject == null) {
+			Debug.Log ("Null GameObejct");
+		}
+		if (collider.gameObject.GetComponent<CollidingObject> () == null) {
+			Debug.Log ("Null component!");
+		}
+		*/
 	}
 }
