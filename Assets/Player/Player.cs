@@ -23,10 +23,12 @@ public class Player : MonoBehaviour{
 	public GameObject coughParticle;
 	private bool holdingBreath = false;
 	private bool canHoldBreath = true;
-	public GameObject albuterolIcon;
 	private bool isJumping = false;
 	private bool isCrouching = false;
 	private AudioSource audioSource;
+
+	public GameObject albuterolIcon, epiPenIcon, singulairIcon, tissuesIcon;
+	private MedicineIcons albuterolIconManager, epiPenIconManager, singulairIconMangaer, tissuesIconManager; 
 
 	Action runningScript;
 
@@ -35,6 +37,11 @@ public class Player : MonoBehaviour{
 		commandController = transform.FindChild ("DDR_Controller").GetComponent<DDR_Controller> ();
 		anim = GetComponent<Animator> ();
 		audioSource = GetComponent<AudioSource> ();
+
+		albuterolIconManager = albuterolIcon.GetComponent<MedicineIcons> ();
+		epiPenIconManager = epiPenIcon.GetComponent<MedicineIcons> ();
+		singulairIconMangaer = singulairIcon.GetComponent<MedicineIcons> ();
+		tissuesIconManager = tissuesIcon.GetComponent<MedicineIcons> ();
 	}
 
 	void Update(){
@@ -71,16 +78,19 @@ public class Player : MonoBehaviour{
 			} else if (Input.GetKeyDown (InputMapping.albuterolCode)) {
 				//Albuterol
 				DDR_Pattern_Menu.ActivateAlbuterolMenu ();
-				albuterolIcon.GetComponent<MedicineIcons> ().deactivateSprite ();
+				albuterolIconManager.deactivateSprite ();
 				PrepareGetCommand (Medicine.albuterolMapping);
 			} else if (Input.GetKeyDown (InputMapping.singulairCode)) {
 				//Singulair
+				singulairIconMangaer.deactivateSprite();
 				PrepareGetCommand (Medicine.singulairMapping);
 			} else if (Input.GetKeyDown (InputMapping.epinephrineCode)) {
 				//epinephrine
+				epiPenIconManager.deactivateSprite();
 				PrepareGetCommand (Medicine.epinephrinMapping);
 			} else if (Input.GetKeyDown (InputMapping.tissueCode)) {
 				//tissues
+				tissuesIconManager.deactivateSprite();
 				PrepareGetCommand (Medicine.tissueMapping);
 			}
 		} else if (isJumping) {
@@ -134,7 +144,11 @@ public class Player : MonoBehaviour{
 	void LeaveGetCommand(){
 		CameraFilter.UnDim ();
 		Time.timeScale = 1.0f;
-		albuterolIcon.GetComponent<MedicineIcons>().activateSprite ();
+		albuterolIconManager.activateSprite ();
+		epiPenIconManager.activateSprite ();
+		singulairIconMangaer.activateSprite ();
+		tissuesIconManager.activateSprite ();
+
 		DDR_Pattern_Menu.DeactivateMenu ();
 		runningScript = StandardInput;
 	}
