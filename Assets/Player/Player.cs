@@ -51,6 +51,12 @@ public class Player : MonoBehaviour{
 			holdingBreath = true;
 		} else if (Input.GetKeyUp (InputMapping.holdBreathCode)) {
 			holdingBreath = false;
+		} else if (Input.GetKey (InputMapping.crouchCode)) {
+			this.GetComponent<BoxCollider2D> ().size = new Vector2(1.4f, 1.5f);
+			this.GetComponent<BoxCollider2D> ().offset = new Vector2(-.1f, -1f);	
+		} else if (Input.GetKeyUp (InputMapping.crouchCode)) {
+			this.GetComponent<BoxCollider2D> ().size = new Vector2(1.4f, 3.5f);
+			this.GetComponent<BoxCollider2D> ().offset = new Vector2(-.1f, 0f);
 		}
 
 

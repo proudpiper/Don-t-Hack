@@ -12,4 +12,6 @@ public static class InputMapping{
 	public const KeyCode tissueCode = KeyCode.Space;
 
 	public const KeyCode holdBreathCode = KeyCode.E;
+	public const KeyCode crouchCode = KeyCode.F;
+	public const KeyCode jumpCode = KeyCode.R;
 }
