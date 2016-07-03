@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour{
 	DDR_Controller commandController;
+	Animator anim;
 
 	public float breath = 100;
 	public float visibility = 100;
@@ -16,12 +17,15 @@ public class Player : MonoBehaviour{
 	private bool holdingBreath = false;
 	public float maxBreath = 100;
 	public GameObject albuterolIcon;
+	private bool isJumping = false;
+	private bool isCrouching = false;
 
 	Action runningScript;
 
 	void Start(){
 		runningScript = Init;
 		commandController = transform.FindChild ("DDR_Controller").GetComponent<DDR_Controller> ();
+		anim = GetComponent<Animator> ();
 	}
 
 	void Update(){
@@ -29,45 +33,55 @@ public class Player : MonoBehaviour{
 	}
 
 	void Init(){
-		runningScript = StandardInput;
+		if(runningScript != null)
+			runningScript = StandardInput;
 	}
 
 	void StandardInput(){
-		if (Input.GetKeyDown (InputMapping.upCode)) {
-			//Jump
-		} else if (Input.GetKeyDown (InputMapping.downCode)) {
-			//Duck
-		} else if (Input.GetKeyDown (InputMapping.albuterolCode)) {
-			//Albuterol
-			albuterolIcon.GetComponent<MedicineIcons>().deactivateSprite();
-			PrepareGetCommand (Medicine.albuterolMapping);
-		} else if (Input.GetKeyDown (InputMapping.singulairCode)) {
-			//Singulair
-			PrepareGetCommand (Medicine.singulairMapping);
-		} else if (Input.GetKeyDown (InputMapping.epinephrineCode)) {
-			//epinephrine
-			PrepareGetCommand (Medicine.epinephrinMapping);
-		} else if (Input.GetKeyDown (InputMapping.tissueCode)) {
-			//tissues
-			PrepareGetCommand (Medicine.tissueMapping);
-		} else if (Input.GetKey (InputMapping.holdBreathCode)) {
-			holdingBreath = true;
-		} else if (Input.GetKeyUp (InputMapping.holdBreathCode)) {
-			holdingBreath = false;
-		} else if (Input.GetKey (InputMapping.crouchCode)) {
-			this.GetComponent<BoxCollider2D> ().size = new Vector2 (1.4f, 1.5f);
-			this.GetComponent<BoxCollider2D> ().offset = new Vector2 (-.1f, -1f);	
-		} else if (Input.GetKeyUp (InputMapping.crouchCode)) {
-			this.GetComponent<BoxCollider2D> ().size = new Vector2 (1.4f, 3.5f);
-			this.GetComponent<BoxCollider2D> ().offset = new Vector2 (-.1f, 0f);
-		} else if (Input.GetKey (InputMapping.jumpCode)) {
-			this.GetComponent<BoxCollider2D> ().size = new Vector2 (1.4f, 1.5f);
-			this.GetComponent<BoxCollider2D> ().offset = new Vector2 (-.1f, 1f);
-		} else if (Input.GetKeyUp (InputMapping.jumpCode)) {
-			this.GetComponent<BoxCollider2D> ().size = new Vector2 (1.4f, 3.5f);
-			this.GetComponent<BoxCollider2D> ().offset = new Vector2 (-.1f, 0f);
+		if (!isJumping && !isCrouching) {
+			if (Input.GetKeyDown (InputMapping.upCode)) {
+				//Jump
+				isJumping = true;
+			} else if (Input.GetKeyDown (InputMapping.downCode)) {
+				//Duck
+				isCrouching = true;
+			} else if (Input.GetKey (InputMapping.holdBreathCode)) {
+				holdingBreath = true;
+			} else if (Input.GetKeyUp (InputMapping.holdBreathCode)) {
+				holdingBreath = false;
+			} else if (Input.GetKey (InputMapping.crouchCode)) {
+				this.GetComponent<BoxCollider2D> ().size = new Vector2 (1.4f, 1.5f);
+				this.GetComponent<BoxCollider2D> ().offset = new Vector2 (-.1f, -1f);	
+			} else if (Input.GetKeyUp (InputMapping.crouchCode)) {
+				this.GetComponent<BoxCollider2D> ().size = new Vector2 (1.4f, 3.5f);
+				this.GetComponent<BoxCollider2D> ().offset = new Vector2 (-.1f, 0f);
+			} else if (Input.GetKey (InputMapping.jumpCode)) {
+				this.GetComponent<BoxCollider2D> ().size = new Vector2 (1.4f, 1.5f);
+				this.GetComponent<BoxCollider2D> ().offset = new Vector2 (-.1f, 1f);
+			} else if (Input.GetKeyUp (InputMapping.jumpCode)) {
+				this.GetComponent<BoxCollider2D> ().size = new Vector2 (1.4f, 3.5f);
+				this.GetComponent<BoxCollider2D> ().offset = new Vector2 (-.1f, 0f);
+			} else if (Input.GetKeyDown (InputMapping.albuterolCode)) {
+				//Albuterol
+				albuterolIcon.GetComponent<MedicineIcons> ().deactivateSprite ();
+				PrepareGetCommand (Medicine.albuterolMapping);
+			} else if (Input.GetKeyDown (InputMapping.singulairCode)) {
+				//Singulair
+				PrepareGetCommand (Medicine.singulairMapping);
+			} else if (Input.GetKeyDown (InputMapping.epinephrineCode)) {
+				//epinephrine
+				PrepareGetCommand (Medicine.epinephrinMapping);
+			} else if (Input.GetKeyDown (InputMapping.tissueCode)) {
+				//tissues
+				PrepareGetCommand (Medicine.tissueMapping);
+			}
+		} else if (isJumping) {
+			if (!anim.GetCurrentAnimatorStateInfo (0).IsName ("Jump"))
+				isJumping = false;
+		} else if (isCrouching) {
+			if (!anim.GetCurrentAnimatorStateInfo (0).IsName ("Crouch"))
+				isCrouching = false;
 		}
-
 
 
 		breathText.text = breath.ToString();

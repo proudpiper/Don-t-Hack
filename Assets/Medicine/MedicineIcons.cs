@@ -3,14 +3,20 @@ using System.Collections;
 
 public class MedicineIcons : MonoBehaviour {
 
+	SpriteRenderer spriteRenderer;
+
 	public Sprite deactiveSprite;
 	public Sprite activeSprite;
 
+	void Start(){
+		spriteRenderer = GetComponent<SpriteRenderer> ();
+	}
+
 	public void deactivateSprite() {
-		this.GetComponent<SpriteRenderer> ().sprite = deactiveSprite;
+		spriteRenderer.sprite = deactiveSprite;
 	}
 
 	public void activateSprite() {
-		this.GetComponent<SpriteRenderer> ().sprite = activeSprite;
+		spriteRenderer.sprite = activeSprite;
 	}
 }

@@ -12,9 +12,17 @@ public class FilterScript : MonoBehaviour {
 		filter.color = new Color (filter.color.r, filter.color.g, filter.color.b, 0.5f);
 		//filter.color.a = 0;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
+	}
+
+	void Dim(){
+		
+	}
+
+	void UnDim(){
+		
 	}
 }
