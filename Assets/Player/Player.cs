@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour{
 	DDR_Controller commandController;
@@ -83,6 +84,9 @@ public class Player : MonoBehaviour{
 				isCrouching = false;
 		}
 
+		if (breath <= 0) {
+			SceneManager.LoadScene ("TitleScene");
+		}
 
 		breathText.text = breath.ToString();
 		visibilityText.text = visibility.ToString();
