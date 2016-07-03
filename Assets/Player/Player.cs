@@ -63,18 +63,10 @@ public class Player : MonoBehaviour{
 			} else if (Input.GetKeyDown (InputMapping.downCode)) {
 				//Duck
 				isCrouching = true;
-			} else if (Input.GetKey (InputMapping.holdBreathCode) && canHoldBreath) {
-				holdingBreath = true;
-			} else if (Input.GetKey (InputMapping.crouchCode)) {
 				this.GetComponent<BoxCollider2D> ().size = new Vector2 (1.4f, 1.5f);
 				this.GetComponent<BoxCollider2D> ().offset = new Vector2 (-.1f, -1f);	
-			} else if (Input.GetKeyUp (InputMapping.crouchCode)) {
-				this.GetComponent<BoxCollider2D> ().size = new Vector2 (1.4f, 3.5f);
-				this.GetComponent<BoxCollider2D> ().offset = new Vector2 (-.1f, 0f);
-			} else if (Input.GetKey (InputMapping.jumpCode)) {
-				
-			} else if (Input.GetKeyUp (InputMapping.jumpCode)) {
-				
+			} else if (Input.GetKey (InputMapping.holdBreathCode) && canHoldBreath) {
+				holdingBreath = true;
 			} else if (Input.GetKeyDown (InputMapping.albuterolCode)) {
 				//Albuterol
 				DDR_Pattern_Menu.ActivateAlbuterolMenu ();
@@ -104,6 +96,8 @@ public class Player : MonoBehaviour{
 		} else if (isCrouching) {
 			if (!anim.GetCurrentAnimatorStateInfo (0).IsName ("Crouch")) {
 				isCrouching = false;
+				this.GetComponent<BoxCollider2D> ().size = new Vector2 (1.4f, 3.5f);
+				this.GetComponent<BoxCollider2D> ().offset = new Vector2 (-.1f, 0f);
 			}
 		} else if (holdingBreath) {
 			if (Input.GetKeyUp (InputMapping.holdBreathCode)) {
