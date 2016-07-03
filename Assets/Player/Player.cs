@@ -12,6 +12,7 @@ public class Player : MonoBehaviour{
 	public Text visibilityText;
 	public Text movementText;
 	public GameObject coughParticle;
+	private bool holdingBreath = false;
 
 	void Start(){
 		runningScript = Init;
@@ -31,26 +32,27 @@ public class Player : MonoBehaviour{
 	void StandardInput(){
 		if (Input.GetKeyDown (InputMapping.upCode)) {
 			//Jump
-		} 
-		else if (Input.GetKeyDown (InputMapping.downCode)) {
+		} else if (Input.GetKeyDown (InputMapping.downCode)) {
 			//Duck
-		}
-		else if (Input.GetKeyDown (InputMapping.albuterolCode)) {
+		} else if (Input.GetKeyDown (InputMapping.albuterolCode)) {
 			//Albuterol
-			PrepareGetCommand(Medicine.albuterolMapping);
-		}
-		else if (Input.GetKeyDown (InputMapping.singulairCode)) {
+			PrepareGetCommand (Medicine.albuterolMapping);
+		} else if (Input.GetKeyDown (InputMapping.singulairCode)) {
 			//Singulair
-			PrepareGetCommand(Medicine.singulairMapping);
-		} 
-		else if (Input.GetKeyDown (InputMapping.epinephrineCode)) {
+			PrepareGetCommand (Medicine.singulairMapping);
+		} else if (Input.GetKeyDown (InputMapping.epinephrineCode)) {
 			//epinephrine
-			PrepareGetCommand(Medicine.epinephrinMapping);
-		} 
-		else if (Input.GetKeyDown (InputMapping.tissueCode)) {
+			PrepareGetCommand (Medicine.epinephrinMapping);
+		} else if (Input.GetKeyDown (InputMapping.tissueCode)) {
 			//tissues
-			PrepareGetCommand(Medicine.tissueMapping);
+			PrepareGetCommand (Medicine.tissueMapping);
+		} else if (Input.GetKey (InputMapping.holdBreathCode)) {
+			holdingBreath = true;
+		} else if (Input.GetKeyUp (InputMapping.holdBreathCode)) {
+			holdingBreath = false;
 		}
+
+
 
 		breathText.text = breath.ToString();
 		visibilityText.text = visibility.ToString();
@@ -114,7 +116,7 @@ public class Player : MonoBehaviour{
 	}
 
 	void OnTriggerEnter2D(Collider2D collider){
-		if (collider.transform.CompareTag ("DamagingObj") == true) {
+		if (collider.transform.CompareTag ("DamagingObj") == true && holdingBreath == false) {
 			collider.gameObject.GetComponent<CollidingObject> ().HandleCollision (this);
 		}
 	}

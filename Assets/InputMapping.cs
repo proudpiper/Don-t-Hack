@@ -10,4 +10,6 @@ public static class InputMapping{
 	public const KeyCode singulairCode = KeyCode.K;
 	public const KeyCode epinephrineCode = KeyCode.L;
 	public const KeyCode tissueCode = KeyCode.Space;
+
+	public const KeyCode holdBreathCode = KeyCode.E;
 }
