@@ -11,7 +11,7 @@ public class Player : MonoBehaviour{
 	public float holdBreathIncMod;
 
 	public float breathMax;
-	public float maxBreathDec;
+	public float breathMaxDec;
 
 	public float breath = 100;
 	public float visibility = 100;
@@ -23,7 +23,6 @@ public class Player : MonoBehaviour{
 	public GameObject coughParticle;
 	private bool holdingBreath = false;
 	private bool canHoldBreath = true;
-	public float maxBreath = 100;
 	public GameObject albuterolIcon;
 	private bool isJumping = false;
 	private bool isCrouching = false;
@@ -58,8 +57,6 @@ public class Player : MonoBehaviour{
 				isCrouching = true;
 			} else if (Input.GetKey (InputMapping.holdBreathCode) && canHoldBreath) {
 				holdingBreath = true;
-			} else if (Input.GetKeyUp (InputMapping.holdBreathCode)) {
-				holdingBreath = false;
 			} else if (Input.GetKey (InputMapping.crouchCode)) {
 				this.GetComponent<BoxCollider2D> ().size = new Vector2 (1.4f, 1.5f);
 				this.GetComponent<BoxCollider2D> ().offset = new Vector2 (-.1f, -1f);	
@@ -95,12 +92,16 @@ public class Player : MonoBehaviour{
 				isCrouching = false;
 			}
 		} else if (holdingBreath) {
+			if (Input.GetKeyUp (InputMapping.holdBreathCode)) {
+				holdingBreath = false;
+			} 
 			breath -= (holdBreathDecMod * Time.deltaTime);
 			if (breath <= 0) {
 				breath = 0;
 				canHoldBreath = false;
-				maxBreath -= maxBreathDec;
-				if(maxBreath <= 0)
+				holdingBreath = false;
+				breathMax -= breathMaxDec;
+				if(breathMax <= 0)
 					SceneManager.LoadScene ("TitleScene");
 			}
 		}
@@ -113,7 +114,7 @@ public class Player : MonoBehaviour{
 			}
 		}	
 
-		if (breath <= 0) {
+		if (breath <= 0 && !holdingBreath) {
 			SceneManager.LoadScene ("TitleScene");
 		}
 
@@ -160,8 +161,8 @@ public class Player : MonoBehaviour{
 		if (medicine.amt > 0) {
 			--medicine.amt;
 			breath += medicine.breathAffect;
-			if (breath > maxBreath) {
-				breath = maxBreath;
+			if (breath > breathMax) {
+				breath = breathMax;
 			}
 		}
 		else {
