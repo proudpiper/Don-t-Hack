@@ -65,6 +65,7 @@ public class Player : MonoBehaviour{
 				this.GetComponent<BoxCollider2D> ().offset = new Vector2 (-.1f, 0f);
 			} else if (Input.GetKeyDown (InputMapping.albuterolCode)) {
 				//Albuterol
+				DDR_Pattern_Menu.ActivateAlbuterolMenu();
 				albuterolIcon.GetComponent<MedicineIcons> ().deactivateSprite ();
 				PrepareGetCommand (Medicine.albuterolMapping);
 			} else if (Input.GetKeyDown (InputMapping.singulairCode)) {
@@ -106,6 +107,7 @@ public class Player : MonoBehaviour{
 		CameraFilter.UnDim ();
 		Time.timeScale = 1.0f;
 		albuterolIcon.GetComponent<MedicineIcons>().activateSprite ();
+		DDR_Pattern_Menu.DeactivateMenu ();
 		runningScript = StandardInput;
 	}
 
