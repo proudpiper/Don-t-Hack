@@ -6,9 +6,9 @@ public static class InputMapping{
 	public const KeyCode leftCode = KeyCode.A;
 	public const KeyCode rightCode = KeyCode.D;
 
-	public const KeyCode albuterolCode = KeyCode.L;
+	public const KeyCode albuterolCode = KeyCode.J;
 	public const KeyCode singulairCode = KeyCode.K;
-	public const KeyCode epinephrineCode = KeyCode.J;
+	public const KeyCode epinephrineCode = KeyCode.L;
 	public const KeyCode tissueCode = KeyCode.Space;
 
 	public const KeyCode holdBreathCode = KeyCode.E;

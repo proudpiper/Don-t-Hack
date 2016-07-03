@@ -18,6 +18,9 @@ public class Player : MonoBehaviour{
 	public float movement = 100;
 	public Text breathText;
 	public Text albuterolAmtText;
+	public Text epenephrineAmtText;
+	public Text singularAmtText;
+	public Text tissueAmtText;
 	public GameObject coughParticle;
 	private bool holdingBreath = false;
 	private bool canHoldBreath = true;
@@ -201,6 +204,18 @@ public class Player : MonoBehaviour{
 
 	public void AlbuterolUpdateCallback(int value){
 		albuterolAmtText.text = value.ToString();
+	}
+
+	public void EpenephrinUpdateCallback(int value){
+		epenephrineAmtText.text = value.ToString();
+	}
+
+	public void SingulairUpdateCallback(int value){
+		singularAmtText.text = value.ToString();
+	}
+
+	public void TissueUpdateCallback(int value){
+		tissueAmtText.text = value.ToString();
 	}
 
 	void ResetAfterCrouchCallback(){

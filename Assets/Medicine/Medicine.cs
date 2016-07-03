@@ -35,9 +35,9 @@ public class Medicine {
 
 	public static void SetupMedicineDereferencer(Player player){
 		patternDerefernecer.Add (albuterolMapping, new Medicine_Reference (5, 10, player.AlbuterolUpdateCallback));
-		patternDerefernecer.Add (singulairMapping, new Medicine_Reference (5, 25, null));
-		patternDerefernecer.Add (epinephrinMapping, new Medicine_Reference (5,  50, null));
-		patternDerefernecer.Add (tissueMapping, new Medicine_Reference (5,  5, null));
+		patternDerefernecer.Add (singulairMapping, new Medicine_Reference (5, 25, player.SingulairUpdateCallback));
+		patternDerefernecer.Add (epinephrinMapping, new Medicine_Reference (5,  50, player.EpenephrinUpdateCallback));
+		patternDerefernecer.Add (tissueMapping, new Medicine_Reference (5,  5, player.TissueUpdateCallback));
 	}
 }
 
