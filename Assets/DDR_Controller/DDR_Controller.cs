@@ -9,7 +9,7 @@ public class DDR_Controller : MonoBehaviour{
 		for (int i = 0; i < MaxCommandStrLength; i++) {
 			commandStr [i] = KeyCode.JoystickButton9;
 		}
-		timer = new Timer (3, CheckCommand);
+		timer = new Timer (1.5f, CheckCommand);
 		this.player = transform.parent.GetComponent<Player> ();
 	}
 

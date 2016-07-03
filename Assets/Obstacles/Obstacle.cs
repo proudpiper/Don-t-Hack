@@ -14,10 +14,11 @@ public class Obstacle : CollidingObject {
 	}
 		
 	void Update() {
-		this.transform.position = new Vector3 (this.transform.position.x - speed, this.transform.position.y, this.transform.position.z);
+		transform.position = Vector3.MoveTowards (transform.position, new Vector3 (this.transform.position.x - speed, this.transform.position.y, this.transform.position.z), Time.deltaTime * speed);
+		//this.transform.position = new Vector3 (this.transform.position.x - speed, this.transform.position.y, this.transform.position.z);
 	}
 
-	void OnExitTrigger2D(Collider2D collider){
+	void OnTriggerExit2D(Collider2D collider){
 		if (collider.transform.CompareTag ("MainCamera"))
 			Destroy (gameObject);
 	}
