@@ -89,7 +89,26 @@ public class GameManager : MonoBehaviour {
 		segmentTimers.Add(new Timer (1.85f, smogSpawnerBottom.SpawnObject));
 		segmentTimers.Add(new Timer (2, smogSpawnerTop.SpawnObject));
 		segmentTimers.Add(new Timer (2, smogSpawnerBottom.SpawnObject));
-		segmentTimers.Add(new Timer(2.3f, Segment4));
+
+		segmentTimers.Add(new Timer (5, smogSpawnerTop.SpawnObject));
+		segmentTimers.Add(new Timer (5, smogSpawnerBottom.SpawnObject));
+		segmentTimers.Add(new Timer (5.10f, smogSpawnerTop.SpawnObject));
+		segmentTimers.Add(new Timer (5.10f, smogSpawnerBottom.SpawnObject));
+		segmentTimers.Add(new Timer (5.25f, smogSpawnerTop.SpawnObject));
+		segmentTimers.Add(new Timer (5.25f, smogSpawnerBottom.SpawnObject));
+		segmentTimers.Add(new Timer (5.35f, smogSpawnerTop.SpawnObject));
+		segmentTimers.Add(new Timer (5.35f, smogSpawnerBottom.SpawnObject));
+		segmentTimers.Add(new Timer (5.5f, smogSpawnerTop.SpawnObject));
+		segmentTimers.Add(new Timer (5.5f, smogSpawnerBottom.SpawnObject));
+		segmentTimers.Add(new Timer (5.65f, smogSpawnerTop.SpawnObject));
+		segmentTimers.Add(new Timer (5.65f, smogSpawnerBottom.SpawnObject));
+		segmentTimers.Add(new Timer (5.75f, smogSpawnerTop.SpawnObject));
+		segmentTimers.Add(new Timer (5.75f, smogSpawnerBottom.SpawnObject));
+		segmentTimers.Add(new Timer (5.85f, smogSpawnerTop.SpawnObject));
+		segmentTimers.Add(new Timer (5.85f, smogSpawnerBottom.SpawnObject));
+		segmentTimers.Add(new Timer (6, smogSpawnerTop.SpawnObject));
+		segmentTimers.Add(new Timer (6, smogSpawnerBottom.SpawnObject));
+		segmentTimers.Add(new Timer(7, Segment4));
 
 		for (int i = 0; i < segmentTimers.Count; i++)
 			segmentTimers [i].ResetTimer ();
@@ -102,6 +121,8 @@ public class GameManager : MonoBehaviour {
 		segmentTimers.Add(new Timer (1.30f, pollenSpawnerTop.SpawnObject));
 		segmentTimers.Add(new Timer (1.70f, pollenSpawnerBottom.SpawnObject));
 		segmentTimers.Add(new Timer (2, smogSpawnerTop.SpawnObject));
+
+		segmentTimers.Add(new Timer (5, no_fur_cat_spawner.SpawnObject));
 
 		for (int i = 0; i < segmentTimers.Count; i++)
 			segmentTimers [i].ResetTimer ();
