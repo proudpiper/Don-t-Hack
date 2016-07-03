@@ -6,10 +6,12 @@ public class Obstacle : CollidingObject {
 	public float breathDamage;
 	public float visibilityDamage;
 	public float speed;
+	public float maxBreathDamage;
 
 	public override void HandleCollision(Player player){
 		player.breath = player.breath - breathDamage;
 		player.visibility = player.visibility - visibilityDamage;
+		player.maxBreath = player.maxBreath - maxBreathDamage;
 		Destroy (gameObject);
 	}
 		

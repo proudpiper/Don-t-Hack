@@ -13,6 +13,7 @@ public class Player : MonoBehaviour{
 	public Text movementText;
 	public GameObject coughParticle;
 	private bool holdingBreath = false;
+	public float maxBreath = 100;
 
 	void Start(){
 		runningScript = Init;
@@ -96,6 +97,9 @@ public class Player : MonoBehaviour{
 				medicine.handler ();
 			--medicine.amt;
 			breath += medicine.breathAffect;
+			if (breath > maxBreath) {
+				breath = maxBreath;
+			}
 		}
 		else {
 			EmptyMedicineRequested ();
