@@ -7,6 +7,12 @@ public class Player : MonoBehaviour{
 	DDR_Controller commandController;
 	Animator anim;
 
+	public float holdBreathDecMod;
+	public float holdBreathIncMod;
+
+	public float breathMax;
+	public float maxBreathDec;
+
 	public float breath = 100;
 	public float visibility = 100;
 	public float movement = 100;
@@ -16,6 +22,7 @@ public class Player : MonoBehaviour{
 	public Text albuterolAmtText;
 	public GameObject coughParticle;
 	private bool holdingBreath = false;
+	private bool canHoldBreath = true;
 	public float maxBreath = 100;
 	public GameObject albuterolIcon;
 	private bool isJumping = false;
@@ -40,7 +47,7 @@ public class Player : MonoBehaviour{
 	}
 
 	void StandardInput(){
-		if (!isJumping && !isCrouching) {
+		if (!isJumping && !isCrouching && !holdingBreath) {
 			
 			if (Input.GetKeyDown (InputMapping.upCode)) {
 				//Jump
@@ -49,7 +56,7 @@ public class Player : MonoBehaviour{
 			} else if (Input.GetKeyDown (InputMapping.downCode)) {
 				//Duck
 				isCrouching = true;
-			} else if (Input.GetKey (InputMapping.holdBreathCode)) {
+			} else if (Input.GetKey (InputMapping.holdBreathCode) && canHoldBreath) {
 				holdingBreath = true;
 			} else if (Input.GetKeyUp (InputMapping.holdBreathCode)) {
 				holdingBreath = false;
@@ -65,7 +72,7 @@ public class Player : MonoBehaviour{
 				
 			} else if (Input.GetKeyDown (InputMapping.albuterolCode)) {
 				//Albuterol
-				DDR_Pattern_Menu.ActivateAlbuterolMenu();
+				DDR_Pattern_Menu.ActivateAlbuterolMenu ();
 				albuterolIcon.GetComponent<MedicineIcons> ().deactivateSprite ();
 				PrepareGetCommand (Medicine.albuterolMapping);
 			} else if (Input.GetKeyDown (InputMapping.singulairCode)) {
@@ -87,7 +94,24 @@ public class Player : MonoBehaviour{
 			if (!anim.GetCurrentAnimatorStateInfo (0).IsName ("Crouch")) {
 				isCrouching = false;
 			}
+		} else if (holdingBreath) {
+			breath -= (holdBreathDecMod * Time.deltaTime);
+			if (breath <= 0) {
+				breath = 0;
+				canHoldBreath = false;
+				maxBreath -= maxBreathDec;
+				if(maxBreath <= 0)
+					SceneManager.LoadScene ("TitleScene");
+			}
 		}
+
+		if (!holdingBreath && breath < breathMax) {
+			breath += (holdBreathIncMod * Time.deltaTime);
+			if (breath >= breathMax) {
+				breath = breathMax;
+				canHoldBreath = true;
+			}
+		}	
 
 		if (breath <= 0) {
 			SceneManager.LoadScene ("TitleScene");
@@ -96,7 +120,6 @@ public class Player : MonoBehaviour{
 		breathText.text = breath.ToString();
 		visibilityText.text = visibility.ToString();
 		movementText.text = movement.ToString();
-
 	}
 
 	void PrepareGetCommand(string medicineMapping){
@@ -160,7 +183,7 @@ public class Player : MonoBehaviour{
 	}
 
 	void OnTriggerEnter2D(Collider2D collider){
-		if (collider.transform.CompareTag ("DamagingObj") == true && holdingBreath == false) {
+		if ((collider.transform.CompareTag ("DamagingObj") == true || collider.transform.CompareTag("Animal"))&& holdingBreath == false) {
 			collider.gameObject.GetComponent<CollidingObject> ().HandleCollision (this);
 		}
 	}
