@@ -11,6 +11,7 @@ public class Player : MonoBehaviour{
 	public Text breathText;
 	public Text visibilityText;
 	public Text movementText;
+	public GameObject coughParticle;
 
 	void Start(){
 		runningScript = Init;
@@ -107,6 +108,8 @@ public class Player : MonoBehaviour{
 
 	public void InvalidMedicineCommand(){
 		Debug.Log ("InvalidMedicine!");
+		Vector3 coughPosition = new Vector3 (this.transform.position.x, this.transform.position.y + 1, 0);
+		Instantiate (coughParticle, coughPosition, coughParticle.transform.rotation);
 		LeaveGetCommand ();
 	}
 
