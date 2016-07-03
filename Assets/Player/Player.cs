@@ -82,14 +82,17 @@ public class Player : MonoBehaviour{
 				PrepareGetCommand (Medicine.albuterolMapping);
 			} else if (Input.GetKeyDown (InputMapping.singulairCode)) {
 				//Singulair
+				DDR_Pattern_Menu.ActivateSingulairPattern();
 				singulairIconMangaer.deactivateSprite();
 				PrepareGetCommand (Medicine.singulairMapping);
 			} else if (Input.GetKeyDown (InputMapping.epinephrineCode)) {
 				//epinephrine
+				DDR_Pattern_Menu.ActivateEpiPenMenu();
 				epiPenIconManager.deactivateSprite();
 				PrepareGetCommand (Medicine.epinephrinMapping);
 			} else if (Input.GetKeyDown (InputMapping.tissueCode)) {
 				//tissues
+				DDR_Pattern_Menu.ActivateTissuesPatter();
 				tissuesIconManager.deactivateSprite();
 				PrepareGetCommand (Medicine.tissueMapping);
 			}
