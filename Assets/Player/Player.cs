@@ -28,6 +28,8 @@ public class Player : MonoBehaviour{
 	private bool isCrouching = false;
 	private AudioSource audioSource;
 
+	public List<AudioClip> coughs;
+
 	public GameObject albuterolIcon, epiPenIcon, singulairIcon, tissuesIcon;
 	private MedicineIcons albuterolIconManager, epiPenIconManager, singulairIconMangaer, tissuesIconManager; 
 
@@ -198,6 +200,7 @@ public class Player : MonoBehaviour{
 	void OnTriggerEnter2D(Collider2D collider){
 		if ((collider.transform.CompareTag ("DamagingObj") == true || collider.transform.CompareTag("Animal") == true)&& holdingBreath == false) {
 			collider.gameObject.GetComponent<CollidingObject> ().HandleCollision (this);
+			audioSource.clip = coughs[Random.Range(0, coughs.Count)];
 			audioSource.Play ();
 		}
 	}
