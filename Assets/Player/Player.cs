@@ -15,6 +15,7 @@ public class Player : MonoBehaviour{
 	public GameObject coughParticle;
 	private bool holdingBreath = false;
 	public float maxBreath = 100;
+	public GameObject albuterolIcon;
 
 	Action runningScript;
 
@@ -38,6 +39,7 @@ public class Player : MonoBehaviour{
 			//Duck
 		} else if (Input.GetKeyDown (InputMapping.albuterolCode)) {
 			//Albuterol
+			albuterolIcon.GetComponent<MedicineIcons>().deactivateSprite();
 			PrepareGetCommand (Medicine.albuterolMapping);
 		} else if (Input.GetKeyDown (InputMapping.singulairCode)) {
 			//Singulair
@@ -82,6 +84,7 @@ public class Player : MonoBehaviour{
 
 	void LeaveGetCommand(){
 		Time.timeScale = 1.0f;
+		albuterolIcon.GetComponent<MedicineIcons>().activateSprite ();
 		runningScript = StandardInput;
 	}
 
