@@ -43,6 +43,7 @@ public class Player : MonoBehaviour{
 			if (Input.GetKeyDown (InputMapping.upCode)) {
 				//Jump
 				isJumping = true;
+				anim.SetTrigger ("jumpAnim");
 			} else if (Input.GetKeyDown (InputMapping.downCode)) {
 				//Duck
 				isCrouching = true;
