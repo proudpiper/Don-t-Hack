@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class ObjectGenerator : MonoBehaviour {
 	public float startOffset;
-	public float releaseRate;
+	public float longestRate;
+	public float shortestRate;
 
 	public GameObject smogCloud, pollenCloud;
 
@@ -28,11 +29,11 @@ public class ObjectGenerator : MonoBehaviour {
 	}
 
 	void Init(){
-		spawnTimer.StartTimer(releaseRate, SpawnObject);
+		spawnTimer.StartTimer(Random.Range(shortestRate,longestRate), SpawnObject);
 	}
 
 	void SpawnObject(){
 		Instantiate(damageObjects[Random.Range(0,damageObjects.Count)], transform.position, transform.rotation);
-		spawnTimer.ResetTimer ();
+		spawnTimer.StartTimer (Random.Range(shortestRate,longestRate), SpawnObject);
 	}
 }
