@@ -61,8 +61,11 @@ public class Player : MonoBehaviour{
 			} else if (Input.GetKeyDown (InputMapping.downCode)) {
 				//Duck
 				isCrouching = true;
+				anim.SetTrigger ("crouchAnim");
 				this.GetComponent<BoxCollider2D> ().size = new Vector2 (1.4f, 1.5f);
-				this.GetComponent<BoxCollider2D> ().offset = new Vector2 (-.1f, -1f);	
+				this.GetComponent<BoxCollider2D> ().offset = new Vector2 (-.1f, -1f);
+				Timer crouchTimer = new Timer ();
+				crouchTimer.StartTimer (1.4f, ResetAfterCrouchCallback);
 			} else if (Input.GetKey (InputMapping.holdBreathCode) && canHoldBreath) {
 				holdingBreath = true;
 			} else if (Input.GetKeyDown (InputMapping.albuterolCode)) {
@@ -94,8 +97,6 @@ public class Player : MonoBehaviour{
 		} else if (isCrouching) {
 			if (!anim.GetCurrentAnimatorStateInfo (0).IsName ("Crouch")) {
 				isCrouching = false;
-				this.GetComponent<BoxCollider2D> ().size = new Vector2 (1.4f, 3.5f);
-				this.GetComponent<BoxCollider2D> ().offset = new Vector2 (-.1f, 0f);
 			}
 		} else if (holdingBreath) {
 			if (Input.GetKeyUp (InputMapping.holdBreathCode)) {
@@ -198,7 +199,11 @@ public class Player : MonoBehaviour{
 		}
 	}
 
-	public  void AlbuterolUpdateCallback(int value){
+	public void AlbuterolUpdateCallback(int value){
 		albuterolAmtText.text = value.ToString();
+	}
+
+	void ResetAfterCrouchCallback(){
+		this.GetComponent<BoxCollider2D> ().offset = new Vector2 (-.1f, 0f);
 	}
 }
