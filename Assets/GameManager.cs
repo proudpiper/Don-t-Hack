@@ -35,15 +35,13 @@ public class GameManager : MonoBehaviour {
 		segmentTimers.Add(new Timer (15, smogSpawnerBottom.SpawnObject));
 		segmentTimers.Add(new Timer (18, smogSpawnerBottom.SpawnObject));
 		segmentTimers.Add(new Timer(19, smogSpawnerTop.SpawnObject));
-
 		segmentTimers.Add(new Timer (21, smogSpawnerBottom.SpawnObject));
-		segmentTimers.Add(new Timer(23f, smogSpawnerTop.SpawnObject));
+		segmentTimers.Add(new Timer(23, smogSpawnerTop.SpawnObject));
 		segmentTimers.Add(new Timer (25, smogSpawnerBottom.SpawnObject));
 		segmentTimers.Add(new Timer(27f, smogSpawnerTop.SpawnObject));
 		segmentTimers.Add(new Timer (29, smogSpawnerBottom.SpawnObject));
-		segmentTimers.Add(new Timer(31f, smogSpawnerTop.SpawnObject));
+		segmentTimers.Add(new Timer(31, smogSpawnerTop.SpawnObject));
 		segmentTimers.Add(new Timer (33, smogSpawnerBottom.SpawnObject));
-		//segmentTimers.Add(new Timer(28, smogSpawnerTop.SpawnObject));
 		segmentTimers.Add(new Timer(35, Segment2));
 
 		for (int i = 0; i < segmentTimers.Count; i++)
@@ -62,7 +60,7 @@ public class GameManager : MonoBehaviour {
 		segmentTimers.Add(new Timer (8.10f, pollenSpawnerBottom.SpawnObject));
 		segmentTimers.Add(new Timer (9, pollenSpawnerTop.SpawnObject));
 		segmentTimers.Add(new Timer (9.10f, pollenSpawnerTop.SpawnObject));
-		segmentTimers.Add (new Timer (12, Segment3));
+		segmentTimers.Add(new Timer (12, Segment3));
 
 		for (int i = 0; i < segmentTimers.Count; i++)
 			segmentTimers [i].ResetTimer ();
@@ -89,7 +87,6 @@ public class GameManager : MonoBehaviour {
 		segmentTimers.Add(new Timer (1.85f, smogSpawnerBottom.SpawnObject));
 		segmentTimers.Add(new Timer (2, smogSpawnerTop.SpawnObject));
 		segmentTimers.Add(new Timer (2, smogSpawnerBottom.SpawnObject));
-
 		segmentTimers.Add(new Timer (5, smogSpawnerTop.SpawnObject));
 		segmentTimers.Add(new Timer (5, smogSpawnerBottom.SpawnObject));
 		segmentTimers.Add(new Timer (5.10f, smogSpawnerTop.SpawnObject));
@@ -118,34 +115,28 @@ public class GameManager : MonoBehaviour {
 		List<Timer> segmentTimers = new List<Timer> ();
 
 		segmentTimers.Add(new Timer (3.2f, no_fur_cat_spawner.SpawnObject));
-
 		segmentTimers.Add(new Timer (5.5f, no_fur_cat_spawner.SpawnObject));
-
 		segmentTimers.Add(new Timer (8, smogSpawnerBottom.SpawnObject));
 		segmentTimers.Add(new Timer (8, no_fur_cat_spawner.SpawnObject));
-
 		segmentTimers.Add(new Timer (11, fur_cat_spawner.SpawnObject));
 		segmentTimers.Add(new Timer (11.5f, pollenSpawnerTop.SpawnObject));
 		segmentTimers.Add(new Timer (14, no_fur_cat_spawner.SpawnObject));
 		segmentTimers.Add(new Timer (14.5f, smogSpawnerBottom.SpawnObject));
 		segmentTimers.Add(new Timer (15, fur_cat_spawner.SpawnObject));
-
 		segmentTimers.Add(new Timer (16, smogSpawnerBottom.SpawnObject));
 		segmentTimers.Add(new Timer (17, fur_cat_spawner.SpawnObject));
-
 		segmentTimers.Add(new Timer (19, pollenSpawnerTop.SpawnObject));
 		segmentTimers.Add(new Timer (19.1f, pollenSpawnerTop.SpawnObject));
 		segmentTimers.Add(new Timer (19.2f, pollenSpawnerTop.SpawnObject));
 		segmentTimers.Add(new Timer (19.3f, pollenSpawnerTop.SpawnObject));
-
 		segmentTimers.Add (new Timer (22, no_fur_cat_spawner.SpawnObject));
 		segmentTimers.Add(new Timer (22, pollenSpawnerTop.SpawnObject));
 		segmentTimers.Add(new Timer (22.1f, pollenSpawnerTop.SpawnObject));
 		segmentTimers.Add(new Timer (22.2f, pollenSpawnerTop.SpawnObject));
 		segmentTimers.Add(new Timer (22.3f, pollenSpawnerTop.SpawnObject));
-		segmentTimers.Add (new Timer (23, fur_cat_spawner.SpawnObject));
-		segmentTimers.Add (new Timer (25, no_fur_cat_spawner.SpawnObject));
-		segmentTimers.Add (new Timer (26, Segment5));
+		segmentTimers.Add(new Timer (23, fur_cat_spawner.SpawnObject));
+		segmentTimers.Add(new Timer (25, no_fur_cat_spawner.SpawnObject));
+		segmentTimers.Add(new Timer (26, Segment5));
 
 		for (int i = 0; i < segmentTimers.Count; i++)
 			segmentTimers [i].ResetTimer ();
@@ -155,27 +146,47 @@ public class GameManager : MonoBehaviour {
 		List<Timer> segmentTimers = new List<Timer> ();
 
 		segmentTimers.Add(new Timer (3, dog_spawner.SpawnObject));
-		segmentTimers.Add (new Timer (4, no_fur_cat_spawner.SpawnObject));
-		segmentTimers.Add (new Timer (4.5f, no_fur_cat_spawner.SpawnObject));
-		segmentTimers.Add (new Timer (5, no_fur_cat_spawner.SpawnObject));
-
+		segmentTimers.Add(new Timer (4, no_fur_cat_spawner.SpawnObject));
+		segmentTimers.Add(new Timer (4.5f, no_fur_cat_spawner.SpawnObject));
+		segmentTimers.Add(new Timer (5, no_fur_cat_spawner.SpawnObject));
 		segmentTimers.Add(new Timer (6, smogSpawnerTop.SpawnObject));
 		segmentTimers.Add(new Timer (6.1f, smogSpawnerTop.SpawnObject));
 		segmentTimers.Add(new Timer (6.2f, smogSpawnerTop.SpawnObject));
 		segmentTimers.Add(new Timer (6.3f, smogSpawnerTop.SpawnObject));
-
 		segmentTimers.Add(new Timer (6.6f, smogSpawnerTop.SpawnObject));
 		segmentTimers.Add(new Timer (6.7f, smogSpawnerTop.SpawnObject));
 		segmentTimers.Add(new Timer (6.8f, smogSpawnerTop.SpawnObject));
-
 		segmentTimers.Add(new Timer (7, dog_spawner.SpawnObject));
+		segmentTimers.Add(new Timer (7.5f, smogSpawnerBottom.SpawnObject));
+		segmentTimers.Add(new Timer (8.5f, smogSpawnerBottom.SpawnObject));
+		segmentTimers.Add(new Timer (9.5f, smogSpawnerBottom.SpawnObject));
+		segmentTimers.Add(new Timer (10.5f, smogSpawnerBottom.SpawnObject));
+		segmentTimers.Add(new Timer (11.5f, smogSpawnerBottom.SpawnObject));
+		segmentTimers.Add(new Timer (11.5f, no_fur_cat_spawner.SpawnObject));
+		segmentTimers.Add(new Timer (12.5f, smogSpawnerBottom.SpawnObject));
+		segmentTimers.Add(new Timer (13.5f, Segment6));
 
-		segmentTimers.Add (new Timer (7.5f, smogSpawnerBottom.SpawnObject));
-		segmentTimers.Add (new Timer (8.5f, smogSpawnerBottom.SpawnObject));
-		segmentTimers.Add (new Timer (9.9f, smogSpawnerBottom.SpawnObject));
-		segmentTimers.Add (new Timer (10.2f, smogSpawnerBottom.SpawnObject));
-		segmentTimers.Add (new Timer (10.4f, smogSpawnerBottom.SpawnObject));
-		segmentTimers.Add (new Timer (10.6f, smogSpawnerBottom.SpawnObject));
+		for (int i = 0; i < segmentTimers.Count; i++)
+			segmentTimers [i].ResetTimer ();
+	}
+
+	void Segment6(){
+		List<Timer> segmentTimers = new List<Timer> ();
+
+		segmentTimers.Add (new Timer (1, fur_cat_spawner.SpawnObject));
+		segmentTimers.Add (new Timer (1, dog_spawner.SpawnObject));
+
+		segmentTimers.Add(new Timer(3, smogSpawnerTop.SpawnObject));
+		segmentTimers.Add(new Timer (5, smogSpawnerBottom.SpawnObject));
+		segmentTimers.Add(new Timer (5, no_fur_cat_spawner.SpawnObject));
+		segmentTimers.Add(new Timer(7, smogSpawnerTop.SpawnObject));
+		segmentTimers.Add(new Timer (9, smogSpawnerBottom.SpawnObject));
+		segmentTimers.Add (new Timer (9, fur_cat_spawner.SpawnObject));
+		segmentTimers.Add(new Timer(11, smogSpawnerTop.SpawnObject));
+		segmentTimers.Add (new Timer (12, dog_spawner.SpawnObject));
+		segmentTimers.Add(new Timer (13, smogSpawnerBottom.SpawnObject));
+
+		segmentTimers.Add (new Timer (17, horse_spawner.SpawnObject));
 
 		for (int i = 0; i < segmentTimers.Count; i++)
 			segmentTimers [i].ResetTimer ();
