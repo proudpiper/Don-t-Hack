@@ -18,6 +18,7 @@ public class Timer {
 			timeLeft -= Time.deltaTime;
 			if (timeLeft <= 0) {
 				timerCompleteHandler ();
+				Timer_Manager.UnsetTimerActive (this);
 			}
 	}
 
