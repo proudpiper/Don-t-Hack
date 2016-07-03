@@ -3,27 +3,13 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour{
 	DDR_Controller commandController;
-	Dictionary<string, Medicine_Reference> medicineCabinet = new Dictionary<string, Medicine_Reference> ();
 
 	public float breath = 100;
 	public float visibility = 100;
 	public float movement = 100;
 
 	void Start(){
-		Medicine.SetupMedicineDereferencer ();
-
 		runningScript = Init;
-
-		Medicine_Reference albuterol_Ref = new Medicine_Reference (5, Medicine.ActivateAlbuterol);
-		Medicine_Reference epinephrine_Ref = new Medicine_Reference (5, Medicine.ActivateEpinephrine);
-		Medicine_Reference singulair_Ref = new Medicine_Reference (5, Medicine.ActivateSingulair);
-		Medicine_Reference tissues_Ref = new Medicine_Reference (5, Medicine.ActivateTissue);
-
-		medicineCabinet.Add ("Albuterol", albuterol_Ref);
-		medicineCabinet.Add ("Epinephrine", epinephrine_Ref);
-		medicineCabinet.Add ("Singulair", singulair_Ref);
-		medicineCabinet.Add ("Tissues", tissues_Ref);
-
 		commandController = transform.FindChild ("DDR_Controller").GetComponent<DDR_Controller> ();
 	}
 
@@ -34,7 +20,6 @@ public class Player : MonoBehaviour{
 	Action runningScript;
 
 	void Init(){
-		//commandController.ReadyListen ();
 		runningScript = StandardInput;
 	}
 
@@ -47,81 +32,79 @@ public class Player : MonoBehaviour{
 		}
 		else if (Input.GetKeyDown (InputMapping.albuterolCode)) {
 			//Albuterol
-			PrepareGetCommand(InputMapping.albuterolCode);
+			PrepareGetCommand(Medicine.albuterolMapping);
 		}
 		else if (Input.GetKeyDown (InputMapping.singulairCode)) {
 			//Singulair
-			PrepareGetCommand(InputMapping.singulairCode);
+			PrepareGetCommand(Medicine.singulairMapping);
 		} 
 		else if (Input.GetKeyDown (InputMapping.epinephrineCode)) {
 			//epinephrine
-			PrepareGetCommand(InputMapping.epinephrineCode);
+			PrepareGetCommand(Medicine.epinephrinMapping);
 		} 
 		else if (Input.GetKeyDown (InputMapping.tissueCode)) {
 			//tissues
-			PrepareGetCommand(InputMapping.tissueCode);
+			PrepareGetCommand(Medicine.tissueMapping);
 		}
 
 	}
 
-	void PrepareGetCommand(KeyCode commandMode){
+	void PrepareGetCommand(string medicineMapping){
+		commandController.ReadyListen (medicineMapping);
 		Time.timeScale = 0.5f;
 		runningScript = GetCommand;
 	}
 
+	void LeaveGetCommand(){
+		Time.timeScale = 1.0f;
+		runningScript = StandardInput;
+	}
+
 	void GetCommand(){
 		if (Input.GetKeyDown (InputMapping.upCode)) {
+			ArrowUpManager.Fire ();
 			commandController.AddCommandChar (InputMapping.upCode);
 		}
 		else if (Input.GetKeyDown (InputMapping.leftCode)) {
+			ArrowLeftManager.Fire ();
 			commandController.AddCommandChar (InputMapping.leftCode);
 		}
 		else if (Input.GetKeyDown (InputMapping.downCode)) {
+			ArrowDownManager.Fire ();
 			commandController.AddCommandChar (InputMapping.downCode);
 		}
 		else if (Input.GetKeyDown (InputMapping.rightCode)) {
+			ArrowRightManager.Fire ();
 			commandController.AddCommandChar (InputMapping.rightCode);
 		}
 	}
 
-	public void UseMedicine(string medicineName){
-		Medicine_Reference medRef;
-		if (medicineCabinet.TryGetValue (medicineName, out medRef)) {
-			if (medRef.amt > 0) {
-				medRef.handler (this);
-				--medRef.amt;
-			}
+	public void UseMedicine(Medicine_Reference medicine){
+		if (medicine.amt > 0) {
+			if(medicine.handler != null)
+				medicine.handler ();
+			--medicine.amt;
+			breath += medicine.breathAffect;
 		}
 		else {
 			EmptyMedicineRequested ();
 		}
 
-		Time.timeScale = 1.0f;
-		runningScript = StandardInput;
-	}
-
-	void Hold(){
+		LeaveGetCommand ();
 	}
 
 	void EmptyMedicineRequested(){
+		LeaveGetCommand ();
+	}
+
+	public void InvalidMedicineCommand(){
+		Debug.Log ("InvalidMedicine!");
+		LeaveGetCommand ();
 	}
 
 	void OnTriggerEnter2D(Collider2D collider){
-		Debug.Log ("Collision!");
 		if (collider.transform.CompareTag ("DamagingObj") == true) {
-			Debug.Log ("Found one!");
 			collider.gameObject.GetComponent<CollidingObject> ().HandleCollision (this);
 		}
-		/*
-		if(collider == null){
-			Debug.Log ("Null Collider");
-		}
-		if (collider.gameObject == null) {
-			Debug.Log ("Null GameObejct");
-		}
-		if (collider.gameObject.GetComponent<CollidingObject> () == null) {
-			Debug.Log ("Null component!");
-		}
-		*/
 	}
 }

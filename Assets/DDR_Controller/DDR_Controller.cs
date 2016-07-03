@@ -6,10 +6,7 @@ public class DDR_Controller : MonoBehaviour{
 	const int MaxCommandStrLength = 5;
 
 	void Start(){
-		for (int i = 0; i < MaxCommandStrLength; i++) {
-			commandStr [i] = KeyCode.JoystickButton9;
-		}
-		timer = new Timer (1.5f, CheckCommand);
+		timer = new Timer (1.0f, CheckCommand);
 		this.player = transform.parent.GetComponent<Player> ();
 	}
 
@@ -17,12 +14,13 @@ public class DDR_Controller : MonoBehaviour{
 	Timer timer;
 
 	//string commandStr;
-	KeyCode[] commandStr = new KeyCode[MaxCommandStrLength];
+	string commandStr = "";
 	int commandStrIndex = 0;
+	string wantedStr = "";
 
 	public void AddCommandChar(KeyCode commandChar){
 		if (commandStrIndex < MaxCommandStrLength) {
-			commandStr [commandStrIndex] = commandChar;
+			commandStr += KeyCodeMapper.KeyCodeToString(commandChar);
 			++commandStrIndex;
 		}
 		if (commandStrIndex == MaxCommandStrLength) {
@@ -32,25 +30,24 @@ public class DDR_Controller : MonoBehaviour{
 
 	void CheckCommand(){
 		timer.StopTimer ();
-		string medicineName;
-		if (Medicine.patternDerefernecer.TryGetValue (commandStr, out medicineName)) {
-			player.UseMedicine (medicineName);
+		Medicine_Reference medicine;
+		if (Medicine.patternDerefernecer.TryGetValue (commandStr, out medicine)) {
+			if (wantedStr.CompareTo (commandStr) == 0)
+				player.UseMedicine (medicine);
+			else
+				player.InvalidMedicineCommand ();
 		}
 		else {
-			InvalidMedicineCommand ();
+			player.InvalidMedicineCommand ();
 		}
 			
-		for (int i = 0; i < MaxCommandStrLength; i++) {
-			commandStr [i] = KeyCode.JoystickButton9;
-		}
+		commandStr = "";
+		wantedStr = "";
 		commandStrIndex = 0;
 	}
 
-	public void ReadyListen(){
+	public void ReadyListen(string medicineMapping){
+		wantedStr = medicineMapping;
 		timer.ResetTimer ();
-	}
-
-	void InvalidMedicineCommand(){
-		Debug.Log ("InvalidMedicine!");
 	}
 }

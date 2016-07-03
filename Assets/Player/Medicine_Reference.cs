@@ -1,11 +1,11 @@
-﻿public delegate void MedicineHandler(Player player);
-
-public class Medicine_Reference{
-	public Medicine_Reference(int amt, MedicineHandler handler){
+﻿public class Medicine_Reference{
+	public Medicine_Reference(int amt, float breathAffect, Action handler){
 		this.amt = amt;
+		this.breathAffect = breathAffect;
 		this.handler = handler;
 	}
 
 	public int amt;
-	public MedicineHandler handler;
+	public float breathAffect;
+	public Action handler;
 }
