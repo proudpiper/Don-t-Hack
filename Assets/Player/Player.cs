@@ -14,17 +14,15 @@ public class Player : MonoBehaviour{
 
 		runningScript = Init;
 
-		Medicine_Reference advair_Ref = new Medicine_Reference (5, Medicine.ActivateAdvair);
 		Medicine_Reference albuterol_Ref = new Medicine_Reference (5, Medicine.ActivateAlbuterol);
 		Medicine_Reference epinephrine_Ref = new Medicine_Reference (5, Medicine.ActivateEpinephrine);
-		Medicine_Reference flonase_Ref = new Medicine_Reference (5, Medicine.ActivateFlonase);
 		Medicine_Reference singulair_Ref = new Medicine_Reference (5, Medicine.ActivateSingulair);
+		Medicine_Reference tissues_Ref = new Medicine_Reference (5, Medicine.ActivateTissue);
 
-		medicineCabinet.Add ("Advari", advair_Ref);
 		medicineCabinet.Add ("Albuterol", albuterol_Ref);
 		medicineCabinet.Add ("Epinephrine", epinephrine_Ref);
-		medicineCabinet.Add ("Flonase", flonase_Ref);
 		medicineCabinet.Add ("Singulair", singulair_Ref);
+		medicineCabinet.Add ("Tissues", tissues_Ref);
 
 		commandController = transform.FindChild ("DDR_Controller").GetComponent<DDR_Controller> ();
 	}
@@ -36,22 +34,48 @@ public class Player : MonoBehaviour{
 	Action runningScript;
 
 	void Init(){
-		commandController.ReadyListen ();
-		runningScript = GetCommand;
+		//commandController.ReadyListen ();
+		runningScript = StandardInput;
+	}
+
+	void StandardInput(){
+		if (Input.GetKeyDown (InputMapping.upCode)) {
+			//Jump
+		} 
+		else if (Input.GetKeyDown (InputMapping.downCode)) {
+			//Duck
+		}
+		else if (Input.GetKeyDown (InputMapping.albuterolCode)) {
+			//Albuterol
+			runningScript = GetCommand;
+		}
+		else if (Input.GetKeyDown (InputMapping.singulairCode)) {
+			//Singulair
+			runningScript = GetCommand;
+		} 
+		else if (Input.GetKeyDown (InputMapping.epinephrineCode)) {
+			//epinephrine
+			runningScript = GetCommand;
+		} 
+		else if (Input.GetKeyDown (InputMapping.tissueCode)) {
+			//tissues
+			runningScript = GetCommand;
+		}
+
 	}
 
 	void GetCommand(){
-		if (Input.GetKeyDown (KeyCode.W)) {
-			commandController.AddCommandChar ('W');
+		if (Input.GetKeyDown (InputMapping.upCode)) {
+			commandController.AddCommandChar (InputMapping.upCode);
 		}
-		else if (Input.GetKeyDown (KeyCode.A)) {
-			commandController.AddCommandChar ('A');
+		else if (Input.GetKeyDown (InputMapping.leftCode)) {
+			commandController.AddCommandChar (InputMapping.leftCode);
 		}
-		else if (Input.GetKeyDown (KeyCode.S)) {
-			commandController.AddCommandChar ('S');
+		else if (Input.GetKeyDown (InputMapping.downCode)) {
+			commandController.AddCommandChar (InputMapping.downCode);
 		}
-		else if (Input.GetKeyDown (KeyCode.D)) {
-			commandController.AddCommandChar ('D');
+		else if (Input.GetKeyDown (InputMapping.rightCode)) {
+			commandController.AddCommandChar (InputMapping.rightCode);
 		}
 	}
 
@@ -66,6 +90,8 @@ public class Player : MonoBehaviour{
 		else {
 			EmptyMedicineRequested ();
 		}
+
+		runningScript = StandardInput;
 	}
 
 	void Hold(){
