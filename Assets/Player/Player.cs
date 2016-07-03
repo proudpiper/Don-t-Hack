@@ -17,8 +17,6 @@ public class Player : MonoBehaviour{
 	public float visibility = 100;
 	public float movement = 100;
 	public Text breathText;
-	public Text visibilityText;
-	public Text movementText;
 	public Text albuterolAmtText;
 	public GameObject coughParticle;
 	private bool holdingBreath = false;
@@ -127,8 +125,6 @@ public class Player : MonoBehaviour{
 		}
 
 		breathText.text = breath.ToString();
-		visibilityText.text = visibility.ToString();
-		movementText.text = movement.ToString();
 	}
 
 	void PrepareGetCommand(string medicineMapping){
