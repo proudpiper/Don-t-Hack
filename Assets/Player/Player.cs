@@ -27,6 +27,7 @@ public class Player : MonoBehaviour{
 		runningScript = Init;
 		commandController = transform.FindChild ("DDR_Controller").GetComponent<DDR_Controller> ();
 		anim = GetComponent<Animator> ();
+
 	}
 
 	void Update(){
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour{
 
 	void StandardInput(){
 		if (!isJumping && !isCrouching) {
+			
 			if (Input.GetKeyDown (InputMapping.upCode)) {
 				//Jump
 				isJumping = true;
@@ -58,11 +60,9 @@ public class Player : MonoBehaviour{
 				this.GetComponent<BoxCollider2D> ().size = new Vector2 (1.4f, 3.5f);
 				this.GetComponent<BoxCollider2D> ().offset = new Vector2 (-.1f, 0f);
 			} else if (Input.GetKey (InputMapping.jumpCode)) {
-				this.GetComponent<BoxCollider2D> ().size = new Vector2 (1.4f, 1.5f);
-				this.GetComponent<BoxCollider2D> ().offset = new Vector2 (-.1f, 1f);
+				
 			} else if (Input.GetKeyUp (InputMapping.jumpCode)) {
-				this.GetComponent<BoxCollider2D> ().size = new Vector2 (1.4f, 3.5f);
-				this.GetComponent<BoxCollider2D> ().offset = new Vector2 (-.1f, 0f);
+				
 			} else if (Input.GetKeyDown (InputMapping.albuterolCode)) {
 				//Albuterol
 				DDR_Pattern_Menu.ActivateAlbuterolMenu();
@@ -79,11 +79,14 @@ public class Player : MonoBehaviour{
 				PrepareGetCommand (Medicine.tissueMapping);
 			}
 		} else if (isJumping) {
-			if (!anim.GetCurrentAnimatorStateInfo (0).IsName ("Jump"))
+			if (!anim.GetCurrentAnimatorStateInfo (0).IsName ("Jump")) {
 				isJumping = false;
+			}
+
 		} else if (isCrouching) {
-			if (!anim.GetCurrentAnimatorStateInfo (0).IsName ("Crouch"))
+			if (!anim.GetCurrentAnimatorStateInfo (0).IsName ("Crouch")) {
 				isCrouching = false;
+			}
 		}
 
 		if (breath <= 0) {
