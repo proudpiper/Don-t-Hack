@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour{
 	DDR_Controller commandController;
@@ -7,6 +8,9 @@ public class Player : MonoBehaviour{
 	public float breath = 100;
 	public float visibility = 100;
 	public float movement = 100;
+	public Text breathText;
+	public Text visibilityText;
+	public Text movementText;
 
 	void Start(){
 		runningScript = Init;
@@ -46,6 +50,10 @@ public class Player : MonoBehaviour{
 			//tissues
 			PrepareGetCommand(Medicine.tissueMapping);
 		}
+
+		breathText.text = breath.ToString();
+		visibilityText.text = visibility.ToString();
+		movementText.text = movement.ToString();
 
 	}
 
