@@ -11,9 +11,12 @@ public class Player : MonoBehaviour{
 	public Text breathText;
 	public Text visibilityText;
 	public Text movementText;
+	public Text albuterolAmtText;
 	public GameObject coughParticle;
 	private bool holdingBreath = false;
 	public float maxBreath = 100;
+
+	Action runningScript;
 
 	void Start(){
 		runningScript = Init;
@@ -23,8 +26,6 @@ public class Player : MonoBehaviour{
 	void Update(){
 		runningScript ();
 	}
-
-	Action runningScript;
 
 	void Init(){
 		runningScript = StandardInput;
@@ -105,8 +106,6 @@ public class Player : MonoBehaviour{
 
 	public void UseMedicine(Medicine_Reference medicine){
 		if (medicine.amt > 0) {
-			if(medicine.handler != null)
-				medicine.handler ();
 			--medicine.amt;
 			breath += medicine.breathAffect;
 			if (breath > maxBreath) {
@@ -135,5 +134,9 @@ public class Player : MonoBehaviour{
 		if (collider.transform.CompareTag ("DamagingObj") == true && holdingBreath == false) {
 			collider.gameObject.GetComponent<CollidingObject> ().HandleCollision (this);
 		}
+	}
+
+	public  void AlbuterolUpdateCallback(int value){
+		albuterolAmtText.text = value.ToString();
 	}
 }

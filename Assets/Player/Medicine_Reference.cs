@@ -1,11 +1,23 @@
 ﻿public class Medicine_Reference{
-	public Medicine_Reference(int amt, float breathAffect, Action handler){
+	public Medicine_Reference(int amt, float breathAffect, ActionGeneric<int> handler){
 		this.amt = amt;
 		this.breathAffect = breathAffect;
 		this.handler = handler;
 	}
 
-	public int amt;
+	 int _amt;
+	public int amt{
+		get{
+			return _amt;
+		}
+		set{
+			_amt = value;
+			if(handler != null)
+				handler(_amt);
+		}
+	}
+
+
 	public float breathAffect;
-	public Action handler;
+	public ActionGeneric<int> handler;
 }

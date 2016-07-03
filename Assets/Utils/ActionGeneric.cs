@@ -1,1 +1,1 @@
-﻿public delegate void ActionTemplate<T>(T value);
+﻿public delegate void ActionGeneric<T>(T value);

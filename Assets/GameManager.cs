@@ -2,7 +2,11 @@
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
+	Player player;
+
 	void Start(){
-		Medicine.SetupMedicineDereferencer ();
+		player = GameObject.Find ("MainCharacterKid").GetComponent<Player> ();
+
+		Medicine.SetupMedicineDereferencer (player);
 	}
 }
