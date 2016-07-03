@@ -7,6 +7,8 @@ public class Player : MonoBehaviour{
 	DDR_Controller commandController;
 	Animator anim;
 
+	const float breathInitial = 100;
+
 	public float holdBreathDecMod;
 	public float holdBreathIncMod;
 
@@ -176,7 +178,12 @@ public class Player : MonoBehaviour{
 			--medicine.amt;
 			breath += medicine.breathAffect;
 			if (breath > breathMax) {
-				breath = breathMax;
+				if (breath > breathInitial) {
+					breath = breathInitial;
+					breathMax = breathInitial;
+				} else {
+					breathMax = breath;
+				}
 			}
 		}
 		else {
