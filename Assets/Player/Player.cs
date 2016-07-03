@@ -26,6 +26,7 @@ public class Player : MonoBehaviour{
 	public GameObject albuterolIcon;
 	private bool isJumping = false;
 	private bool isCrouching = false;
+	private AudioSource audioSource;
 
 	Action runningScript;
 
@@ -33,7 +34,7 @@ public class Player : MonoBehaviour{
 		runningScript = Init;
 		commandController = transform.FindChild ("DDR_Controller").GetComponent<DDR_Controller> ();
 		anim = GetComponent<Animator> ();
-
+		audioSource = GetComponent<AudioSource> ();
 	}
 
 	void Update(){
@@ -184,8 +185,9 @@ public class Player : MonoBehaviour{
 	}
 
 	void OnTriggerEnter2D(Collider2D collider){
-		if ((collider.transform.CompareTag ("DamagingObj") == true || collider.transform.CompareTag("Animal"))&& holdingBreath == false) {
+		if ((collider.transform.CompareTag ("DamagingObj") == true || collider.transform.CompareTag("Animal") == true)&& holdingBreath == false) {
 			collider.gameObject.GetComponent<CollidingObject> ().HandleCollision (this);
+			audioSource.Play ();
 		}
 	}
 
