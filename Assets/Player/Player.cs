@@ -47,21 +47,26 @@ public class Player : MonoBehaviour{
 		}
 		else if (Input.GetKeyDown (InputMapping.albuterolCode)) {
 			//Albuterol
-			runningScript = GetCommand;
+			PrepareGetCommand(InputMapping.albuterolCode);
 		}
 		else if (Input.GetKeyDown (InputMapping.singulairCode)) {
 			//Singulair
-			runningScript = GetCommand;
+			PrepareGetCommand(InputMapping.singulairCode);
 		} 
 		else if (Input.GetKeyDown (InputMapping.epinephrineCode)) {
 			//epinephrine
-			runningScript = GetCommand;
+			PrepareGetCommand(InputMapping.epinephrineCode);
 		} 
 		else if (Input.GetKeyDown (InputMapping.tissueCode)) {
 			//tissues
-			runningScript = GetCommand;
+			PrepareGetCommand(InputMapping.tissueCode);
 		}
 
+	}
+
+	void PrepareGetCommand(KeyCode commandMode){
+		Time.timeScale = 0.5f;
+		runningScript = GetCommand;
 	}
 
 	void GetCommand(){
@@ -91,6 +96,7 @@ public class Player : MonoBehaviour{
 			EmptyMedicineRequested ();
 		}
 
+		Time.timeScale = 1.0f;
 		runningScript = StandardInput;
 	}
 
