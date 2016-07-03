@@ -96,11 +96,13 @@ public class Player : MonoBehaviour{
 
 	void PrepareGetCommand(string medicineMapping){
 		commandController.ReadyListen (medicineMapping);
+		CameraFilter.Dim ();
 		Time.timeScale = 0.5f;
 		runningScript = GetCommand;
 	}
 
 	void LeaveGetCommand(){
+		CameraFilter.UnDim ();
 		Time.timeScale = 1.0f;
 		albuterolIcon.GetComponent<MedicineIcons>().activateSprite ();
 		runningScript = StandardInput;
